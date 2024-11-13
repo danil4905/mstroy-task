@@ -2,17 +2,19 @@ import type { RowData } from '@/interfaces/RowData'
 
 export class TreeStore {
   private items: RowData[]
-  private readyItems
-
+  public history: RowData[][] = []
+  public currentStep = -1
   constructor(items: RowData[]) {
     this.items = items
-    this.readyItems = items.map(el => ({...el, type: el.parent? '' : ''}))
+    this.saveState()
   }
 
   getAll(): RowData[] {
-    return this.items
+    return this.items.map((el) => ({
+      ...el,
+      category: this.getChildren(el.id)?.length ? 'Категория' : 'Элемент',
+    }))
   }
-
   getItem(id: string | number): RowData | undefined {
     return this.items.find((item) => item.id === id)
   }
@@ -49,6 +51,7 @@ export class TreeStore {
 
   addItem(item: RowData): void {
     this.items.push(item)
+    this.saveState()
   }
 
   removeItem(id: string | number): void {
@@ -56,5 +59,25 @@ export class TreeStore {
     this.items = this.items.filter(
       (item) => item.id !== id && !allChildren.some((child) => child.id === item.id),
     )
+    this.saveState()
+  }
+  undo(): void {
+    if (this.currentStep > 0) {
+      this.currentStep--
+      this.items = [...this.history[this.currentStep]]
+    }
+  }
+
+  redo(): void {
+    if (this.currentStep < this.history.length - 1) {
+      this.currentStep++
+      this.items = [...this.history[this.currentStep]]
+    }
+  }
+
+  private saveState(): void {
+    this.history = this.history.slice(0, this.currentStep + 1)
+    this.history.push([...this.items])
+    this.currentStep++
   }
 }
