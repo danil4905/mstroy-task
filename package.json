@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 3000",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",
@@ -14,6 +14,8 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "ag-grid-enterprise": "^32.3.3",
+    "ag-grid-vue3": "^32.3.3",
     "vue": "^3.5.12"
   },
   "devDependencies": {
