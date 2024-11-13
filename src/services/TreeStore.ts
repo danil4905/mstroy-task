@@ -2,9 +2,11 @@ import type { RowData } from '@/interfaces/RowData'
 
 export class TreeStore {
   private items: RowData[]
+  private readyItems
 
   constructor(items: RowData[]) {
     this.items = items
+    this.readyItems = items.map(el => ({...el, type: el.parent? '' : ''}))
   }
 
   getAll(): RowData[] {
