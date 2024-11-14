@@ -4,6 +4,8 @@ Test project for MStroy company
 
 Node v20
 
+**TreeStore class is located at src/services/TreeStore.ts**
+
 ## Project Setup
 
 ```sh
