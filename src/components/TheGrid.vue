@@ -43,7 +43,8 @@ export default defineComponent({
       rowData.value = store.getAll()
     }
     const columnDefs = reactive([
-      { headerName: '№ п/п', field: 'id', width: 110, cellDataType: 'text' },
+      { field: 'id', hide: true},
+      { headerName: '№ п/п', field: 'index', width: 110, valueGetter: 'node.rowIndex + 1' },
       {
         headerName: 'Категория',
         field: 'category',
@@ -117,7 +118,7 @@ export default defineComponent({
       :rowData="rowData"
       treeData
       :getDataPath="getDataPath"
-      :groupDefaultExpanded="isEditMode ? -1 : 0"
+      :groupDefaultExpanded="-1"
       :autoGroupColumnDef="{ headerName: 'Категория', field: 'category' }"
       pagination
       groupDisplayType="custom"
