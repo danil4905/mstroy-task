@@ -71,7 +71,7 @@ export default defineComponent({
           const newItem = {
             id: Date.now(),
             parent: event.data.id,
-            label: 'Новый элемент ' + store.currentStep + 1,
+            label: 'Новый элемент ' + (store.currentStep + 1),
             category: 'Элемент',
           }
           store.addItem(newItem)
@@ -85,7 +85,6 @@ export default defineComponent({
       rowData,
       getDataPath,
       columnDefs,
-      history,
       redo,
       undo,
       canUndo,
@@ -137,10 +136,15 @@ export default defineComponent({
 .control-btn {
   background: none;
   border: none;
-  cursor: pointer;
   color: cornflowerblue;
 }
 .control-btn:hover {
   opacity: 80%;
+}
+.control button {
+  cursor: pointer;
+}
+.control button:disabled {
+  cursor: default;
 }
 </style>

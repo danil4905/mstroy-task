@@ -14,9 +14,7 @@ const mock = [
 
 <template>
   <main>
-    <h1>
-      MStroy test
-    </h1>
+    <h1>MStroy test</h1>
     <TheGrid :items="mock" />
   </main>
 </template>
