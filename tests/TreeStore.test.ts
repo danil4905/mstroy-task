@@ -36,6 +36,7 @@ describe('TreeStore', () => {
 
   test('getAllChildren() should return all descendants of the given item', () => {
     const allChildren = store.getAllChildren(1);
+    console.log(allChildren)
     expect(allChildren).toEqual([
       { id: '2', parent: 1, label: 'Айтем 2' },
       { id: 4, parent: '2', label: 'Айтем 4' },
